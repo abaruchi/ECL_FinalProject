@@ -1,6 +1,5 @@
-docker/var/HPCCSystems/mydropzone
+docker/etc/HPCCSystems
+docker/var/HPCCSystems
 *.log
 *.stderr
 *.stdout
-docker/var/HPCCSystems/hpcc-data/dali
-docker/var/HPCCSystems/hpcc-mirror/dali
