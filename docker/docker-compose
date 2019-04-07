@@ -7,11 +7,12 @@ services:
       context: .
       dockerfile: ./compose/hpcc/Dockerfile-hpcc
     command: /start.sh
-#    volumes:
-#      - .:/invoice_api
-#      - .:/media
+    volumes:
+      - ./var/HPCCSystems/:/var/lib/HPCCSystems/
+      - ./etc/HPCCSystems/:/etc/HPCCSystems/
     ports:
       - "8010:8010"
       - "8002:8002"
       - "8015:8015"
       - "9876:9876"
+      - "2022:22"
