@@ -3,7 +3,6 @@
 echo "Unpacking /var/ files"
 cd ./var/
 tar xzvf HPCCSystems.var.lib.tar.gz
-cd ..
 
 echo "Unpacking /etc/ files"
 cd ../etc/
