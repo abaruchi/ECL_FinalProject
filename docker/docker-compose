@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+  hpcc:
+    build:
+      context: .
+      dockerfile: ./compose/hpcc/Dockerfile-hpcc
+    command: /start.sh
+#    volumes:
+#      - .:/invoice_api
+#      - .:/media
+    ports:
+      - "8010:8010"
+      - "8002:8002"
+      - "8015:8015"
+      - "9876:9876"
