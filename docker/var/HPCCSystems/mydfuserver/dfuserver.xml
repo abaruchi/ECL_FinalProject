@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DFUSERVER name="mydfuserver" daliservers="172.20.0.2:7070" enableSNMP="0" enableSysLog="0" queue="dfuserver_queue" monitorqueue="dfuserver_monitor_queue" monitorinterval="900" transferBufferSize="65536">
+  <Directories name="HPCCSystems">
+   <Category dir="/var/log/[NAME]/[INST]" name="log"/>
+   <Category dir="/var/lib/[NAME]/[INST]" name="run"/>
+   <Category dir="/etc/[NAME]/[INST]" name="conf"/>
+   <Category dir="/var/lib/[NAME]/[INST]/temp" name="temp"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data/[COMPONENT]" name="data"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data2/[COMPONENT]" name="data2"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data3/[COMPONENT]" name="data3"/>
+   <Category dir="/var/lib/[NAME]/hpcc-mirror/[COMPONENT]" name="mirror"/>
+   <Category dir="/var/lib/[NAME]/queries/[INST]" name="query"/>
+   <Category dir="/var/lock/[NAME]/[INST]" name="lock"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data4/[COMPONENT]" name="data4"/>
+   <Category dir="/var/lib/[NAME]/keys" name="keys"/>
+  </Directories>
+  <SSH SSHidentityfile="$HOME/.ssh/id_rsa" SSHretries="3" SSHtimeout="0" SSHusername="hpcc"/>
+</DFUSERVER>

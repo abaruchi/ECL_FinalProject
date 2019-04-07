@@ -1,0 +1,4 @@
+<EclCCserver build="_" daliServers="172.20.0.2:7070" enableEclccDali="true" enableSysLog="true" generatePrecompiledHeader="true" maxEclccProcesses="4" name="myeclccserver" traceLevel="1">
+  <Option name="maxCompileThreads" value="2"/>
+  <Option name="passDFSToEclcc" value="1"/>
+</EclCCserver>

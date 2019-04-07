@@ -1,0 +1,18 @@
+<Thor xmlns:fo="http://www.w3.org/1999/XSL/Format" name="mythor" nodeGroup="mythor" outputNodeGroup="mythor" autoAffinity="true" autoCopyBackup="false" channelsPerSlave="1" compressInternalSpills="true" daliServers="172.20.0.2:7070" fileCacheLimit="1800" heapRetainMemory="false" heapUseHugePages="false" heapUseTransparentHugePages="true" localThor="true" localThorPortInc="20" masterport="20000" monitorDaliFileServer="true" numaBindLocal="false" pluginsPath="/opt/HPCCSystems/plugins/" replicateAsync="false" replicateOutputs="false" slaveport="20100" slavesPerNode="1" watchdogEnabled="true" watchdogProgressEnabled="true">
+  <Directories name="HPCCSystems">
+   <Category dir="/var/log/[NAME]/[INST]" name="log"/>
+   <Category dir="/var/lib/[NAME]/[INST]" name="run"/>
+   <Category dir="/etc/[NAME]/[INST]" name="conf"/>
+   <Category dir="/var/lib/[NAME]/[INST]/temp" name="temp"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data/[COMPONENT]" name="data"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data2/[COMPONENT]" name="data2"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data3/[COMPONENT]" name="data3"/>
+   <Category dir="/var/lib/[NAME]/hpcc-mirror/[COMPONENT]" name="mirror"/>
+   <Category dir="/var/lib/[NAME]/queries/[INST]" name="query"/>
+   <Category dir="/var/lock/[NAME]/[INST]" name="lock"/>
+   <Category dir="/var/lib/[NAME]/hpcc-data4/[COMPONENT]" name="data4"/>
+   <Category dir="/var/lib/[NAME]/keys" name="keys"/>
+  </Directories>
+  <Debug/>
+  <SSH SSHidentityfile="$HOME/.ssh/id_rsa" SSHretries="3" SSHtimeout="0" SSHusername="hpcc"/>
+</Thor>
