@@ -1,0 +1,6 @@
+FROM hpccsystems/hpcc:latest
+
+RUN apt-get update && apt-get install -y iputils-ping curl xterm
+
+COPY ./compose/hpcc/start.sh /start.sh
+RUN chmod +x /start.sh
