@@ -3,3 +3,4 @@ docker/var/HPCCSystems
 *.log
 *.stderr
 *.stdout
+.eclcc/
