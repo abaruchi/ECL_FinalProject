@@ -4,3 +4,4 @@ docker/var/HPCCSystems
 *.stderr
 *.stdout
 .eclcc/
+CPAGTO/BWR_Testing.ecl
