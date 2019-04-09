@@ -32,5 +32,5 @@ EXPORT File_CPDC := MODULE
     ds1 := DATASET(File_2018_10, Layout_CPDC, CSV);
     ds2 := DATASET(File_2018_12, Layout_CPDC, CSV);
 
-    EXPORT dsCPDC := MERGE(ds1, ds2, SORTED(CPF_PORTADOR,CNPJ_CPF_FAVORECIDO));
+    EXPORT dsCPDC := ds1 + ds2;
 END;

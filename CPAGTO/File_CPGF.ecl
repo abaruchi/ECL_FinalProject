@@ -27,7 +27,7 @@ EXPORT File_CPGF := MODULE
     ds1 := DATASET(File_2018_11, Layout_CPGF, CSV);
     ds2 := DATASET(File_2018_12, Layout_CPGF, CSV);
 
-    EXPORT dsCPGF := MERGE(ds1, ds2, SORTED(CPF_PORTADOR,CNPJ_CPF_FAVORECIDO));
+    EXPORT dsCPGF := ds1 + ds2;
 
 
 END;

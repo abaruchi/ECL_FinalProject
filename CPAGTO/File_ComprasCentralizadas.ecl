@@ -26,6 +26,6 @@ EXPORT File_ComprasCentralizadas := MODULE
     ds1 := DATASET(File_2018_11, Layout_ComprasCentralizadas, CSV);
     ds2 := DATASET(File_2018_12, Layout_ComprasCentralizadas, CSV);
 
-    EXPORT dsComprasCentralizadas := MERGE(ds1, ds2, SORTED(CNPJ_CPF_FAVORECIDO));
+    EXPORT dsComprasCentralizadas := ds1 + ds2;
 
 END;
