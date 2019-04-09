@@ -1,0 +1,40 @@
+IMPORT $;
+
+dsCCentralizadas := $.File_ComprasCentralizadas.dsComprasCentralizadas;
+dsCPDC := $.File_CPDC.dsCPDC;
+dsCPFG := $.File_CPGF.dsCPGF;
+
+EXPORT Data_Consolidation := MODULE
+    RecOutLayout := RECORD
+        UNSIGNED CODIGO_ORGAO_SUPERIOR;
+        STRING NOME_ORGAO_SUPERIOR;
+        UNSIGNED CODIGO_ORGAO;
+        STRING NOME_ORGAO;
+        UNSIGNED CODIGO_UNID_GESTORA;
+        STRING NOME_UNIDADE_GESTORA;
+        UNSIGNED ANO_EXTRATO;
+        UNSIGNED MES_EXTRATO;
+        STRING18 CNPJ_CPF_FAVORECIDO;
+        STRING NOME_FAVORECIDO;
+        STRING TRANSACAO;
+        STRING10 DATA_TRANSACAO;
+        STRING VALOR_TRANSACAO;
+
+        STRING TIPO_AQUISICAO := '';
+
+        STRING14 CPF_PORTADOR := '';
+        STRING NOME_PORTADOR := '';
+
+        UNSIGNED NUM_CONVENIO := ''; 
+        UNSIGNED COD_CONVENENTE := '';
+        STRING NOME_CONVENENTE := '';
+        STRING EXECUTOR_DESPESA := '';
+    END; 
+
+    Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, SELF:=LEFT));
+    Pro02 := PROJECT(dsCPDC, TRANSFORM(RecOutLayout, SELF:=LEFT));
+    Pro03 := PROJECT(dsCPFG, TRANSFORM(RecOutLayout, SELF:=LEFT));
+
+    EXPORT dsCPAGTO := MERGE(MERGE(Pro01,Pro02),Pro03);
+
+END;
