@@ -20,7 +20,7 @@ EXPORT File_ComprasCentralizadas := MODULE
         STRING NOME_FAVORECIDO;
         STRING TRANSACAO;
         STRING10 DATA_TRANSACAO;
-        STRING VALOR_TRANSACAO;
+        DECIMAL15_2 VALOR_TRANSACAO;
     END;
 
     ds1 := DATASET(File_2018_11, Layout_ComprasCentralizadas, CSV);
