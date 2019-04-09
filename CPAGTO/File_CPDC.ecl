@@ -1,8 +1,8 @@
 IMPORT $;
 
 // List of files to process
-File_2018_10 := 'online::ab::cpagto::201810_cpdc';
-File_2018_11 := 'online::ab::cpagto::201811_cpdc';
+File_2018_10 := '~online::ab::cpagto::201810_cpdc';
+File_2018_12 := '~online::ab::cpagto::201812_cpdc';
 
 EXPORT File_CPDC := MODULE
 
@@ -30,7 +30,7 @@ EXPORT File_CPDC := MODULE
     END;
 
     ds1 := DATASET(File_2018_10, Layout_CPDC, CSV);
-    ds2 := DATASET(File_2018_11, Layout_CPDC, CSV);
+    ds2 := DATASET(File_2018_12, Layout_CPDC, CSV);
 
     EXPORT dsCPDC := MERGE(ds1, ds2, SORTED(CPF_PORTADOR,CNPJ_CPF_FAVORECIDO));
 END;
