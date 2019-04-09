@@ -5,7 +5,7 @@ dsCPDC := $.File_CPDC.dsCPDC;
 dsCPFG := $.File_CPGF.dsCPGF;
 
 EXPORT Data_Consolidation := MODULE
-    RecOutLayout := RECORD
+    EXPORT RecOutLayout := RECORD
         UNSIGNED CODIGO_ORGAO_SUPERIOR;
         STRING NOME_ORGAO_SUPERIOR;
         UNSIGNED CODIGO_ORGAO;
