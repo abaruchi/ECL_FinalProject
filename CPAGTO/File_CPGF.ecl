@@ -4,9 +4,9 @@ IMPORT $;
 File_2018_11 := '~online::ab::cpagto::201811_cpgf';
 File_2018_12 := '~online::ab::cpagto::201812_cpgf';
 
-EXPORT File_CPFG := MODULE
+EXPORT File_CPGF := MODULE
 
-    Layout_CPGF := RECORD
+    EXPORT Layout_CPGF := RECORD
         UNSIGNED CODIGO_ORGAO_SUPERIOR;
         STRING NOME_ORGAO_SUPERIOR;
         UNSIGNED CODIGO_ORGAO;
