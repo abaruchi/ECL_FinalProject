@@ -4,6 +4,8 @@ dsCCentralizadas := $.File_ComprasCentralizadas.dsComprasCentralizadas;
 dsCPDC := $.File_CPDC.dsCPDC;
 dsCPFG := $.File_CPGF.dsCPGF;
 
+StripIt(STRING val) := REGEXREPLACE(',', val, '.');
+
 EXPORT Data_Consolidation := MODULE
     EXPORT RecOutLayout := RECORD
         UNSIGNED CODIGO_ORGAO_SUPERIOR;
