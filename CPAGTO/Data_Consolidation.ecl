@@ -27,16 +27,22 @@ EXPORT Data_Consolidation := MODULE
         STRING14 CPF_PORTADOR := '';
         STRING NOME_PORTADOR := '';
 
-        UNSIGNED NUM_CONVENIO := ''; 
-        UNSIGNED COD_CONVENENTE := '';
+        UNSIGNED NUM_CONVENIO := 0; 
+        UNSIGNED COD_CONVENENTE := 0;
         STRING NOME_CONVENENTE := '';
         STRING EXECUTOR_DESPESA := '';
     END; 
 
-    Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, SELF:=LEFT));
-    Pro02 := PROJECT(dsCPDC, TRANSFORM(RecOutLayout, SELF:=LEFT));
-    Pro03 := PROJECT(dsCPFG, TRANSFORM(RecOutLayout, SELF:=LEFT));
+    Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, 
+                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO), 
+                                        SELF:=LEFT));
+    Pro02 := PROJECT(dsCPDC, TRANSFORM(RecOutLayout, 
+                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
+                                        SELF:=LEFT));
+    Pro03 := PROJECT(dsCPFG, TRANSFORM(RecOutLayout,
+                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO), 
+                                        SELF:=LEFT));
 
-    EXPORT dsCPAGTO := MERGE(MERGE(Pro01,Pro02),Pro03);
+    EXPORT dsCPAGTO := Pro01 + Pro02 + Pro03;
 
 END;
