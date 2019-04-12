@@ -5,6 +5,7 @@ dsCPDC := $.File_CPDC.dsCPDC;
 dsCPFG := $.File_CPGF.dsCPGF;
 
 StripIt(STRING val) := REGEXREPLACE(',', val, '.');
+ReplaceSlash(STRING val) := REGEXREPLACE('/', val, '');
 
 EXPORT Data_Consolidation := MODULE
     EXPORT RecOutLayout := RECORD
@@ -19,7 +20,7 @@ EXPORT Data_Consolidation := MODULE
         STRING18 CNPJ_CPF_FAVORECIDO;
         STRING NOME_FAVORECIDO;
         STRING TRANSACAO;
-        STRING10 DATA_TRANSACAO;
+        UNSIGNED DATA_TRANSACAO;
         DECIMAL15_2 VALOR_TRANSACAO;
 
         STRING TIPO_AQUISICAO := '';
@@ -46,13 +47,16 @@ EXPORT Data_Consolidation := MODULE
     END;   
 
     Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, 
-                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO), 
+                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO),
                                         SELF:=LEFT));
     Pro02 := PROJECT(dsCPDC, TRANSFORM(RecOutLayout, 
                                         SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO),
                                         SELF:=LEFT));
     Pro03 := PROJECT(dsCPFG, TRANSFORM(RecOutLayout,
-                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO), 
+                                        SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO), 
                                         SELF:=LEFT));
 
     EXPORT dsCPAGTO := Pro01 + Pro02 + Pro03;
@@ -61,10 +65,12 @@ EXPORT Data_Consolidation := MODULE
     EXPORT IDX_COD_ORGS := INDEX(dsCPAGTO, {CODIGO_ORGAO_SUPERIOR, CODIGO_ORGAO},{dsCPAGTO}, '~ONLINE::AB::KEY::COD_ORGS');
     EXPORT IDX_CPF_POR := INDEX(dsCPAGTO, {CPF_PORTADOR},{dsCPAGTO}, '~ONLINE::AB::KEY::CPF_POR');
     EXPORT IDX_CPF_FAV := INDEX(dsCPAGTO, {CNPJ_CPF_FAVORECIDO},{dsCPAGTO}, '~ONLINE::AB::KEY::CPF_FAV');
+    EXPORT IDX_DATA_TRANS := INDEX(dsCPAGTO, {DATA_TRANSACAO}, {dsCPAGTO}, '~ONLINE::AB::KEY::DATA_TRANS');
 
     EXPORT BUILD_COD_ORGS := BUILD(IDX_COD_ORGS, OVERWRITE);
     EXPORT BUILD_CPF_POR := BUILD(IDX_CPF_POR, OVERWRITE);
     EXPORT BUILD_CPF_FAV := BUILD(IDX_CPF_FAV, OVERWRITE);
+    EXPORT BUILD_DATA_TRANS := BUILD(IDX_DATA_TRANS, OVERWRITE);
 
-    EXPORT BUILD_ALL := PARALLEL(BUILD_COD_ORGS,BUILD_CPF_POR,BUILD_CPF_FAV);
+    EXPORT BUILD_ALL := PARALLEL(BUILD_COD_ORGS,BUILD_CPF_POR,BUILD_CPF_FAV,BUILD_DATA_TRANS);
 END;
