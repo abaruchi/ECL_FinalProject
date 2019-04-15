@@ -5,7 +5,7 @@ dsCPDC := $.File_CPDC.dsCPDC;
 dsCPFG := $.File_CPGF.dsCPGF;
 
 StripIt(STRING val) := REGEXREPLACE(',', val, '.');
-ReplaceSlash(STRING val) := REGEXREPLACE('/', val, '');
+ReplaceDateFormat(STRING val) := REGEXREPLACE('(\\d{1,2})/(\\d{1,2})/(\\d{4})', val, '$3$2$1');
 
 EXPORT Data_Consolidation := MODULE
     EXPORT RecOutLayout := RECORD
@@ -48,15 +48,15 @@ EXPORT Data_Consolidation := MODULE
 
     Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, 
                                         SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
-                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO),
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceDateFormat(LEFT.DATA_TRANSACAO),
                                         SELF:=LEFT));
     Pro02 := PROJECT(dsCPDC, TRANSFORM(RecOutLayout, 
                                         SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
-                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO),
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceDateFormat(LEFT.DATA_TRANSACAO),
                                         SELF:=LEFT));
     Pro03 := PROJECT(dsCPFG, TRANSFORM(RecOutLayout,
                                         SELF.VALOR_TRANSACAO := (DECIMAL15_2) StripIt(LEFT.VALOR_TRANSACAO),
-                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceSlash(LEFT.DATA_TRANSACAO), 
+                                        SELF.DATA_TRANSACAO := (UNSIGNED) ReplaceDateFormat(LEFT.DATA_TRANSACAO), 
                                         SELF:=LEFT));
 
     EXPORT dsCPAGTO := Pro01 + Pro02 + Pro03;
