@@ -8,7 +8,7 @@
         "name": "Localhost Thor",
         "type": "ecl",
         "request": "launch",
-        "mode": "submit",
+        "mode": "compile",
         "workspace": "${workspaceRoot}",
         "program": "${file}",
         "protocol": "http",
