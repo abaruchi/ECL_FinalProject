@@ -44,6 +44,7 @@ EXPORT Data_Consolidation := MODULE
         EXPORT STRING CPF_FAVORECIDO := '';
         EXPORT DECIMAL15_2 VALOR_MIN := 0;
         EXPORT DECIMAL15_2 VALOR_MAX := 0;
+        EXPORT UNSIGNED MAX_REGISTER_COUNT := 0;
     END;   
 
     Pro01 := PROJECT(dsCCentralizadas, TRANSFORM(RecOutLayout, 
