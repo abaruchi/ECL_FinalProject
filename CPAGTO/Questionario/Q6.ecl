@@ -35,6 +35,6 @@ EXPORT Q6 () := FUNCTION
                 dsCPF_PortFiltered,
                 dsCPF_PortFiltered(CNPJ_CPF_FAVORECIDO = Parms.CPF_FAVORECIDO));
 
-    RETURN dsCPF_FavFiltered;
+    RETURN CHOOSEN(dsCPF_FavFiltered, IF(Parms.MAX_REGISTER_COUNT <> 0, Parms.MAX_REGISTER_COUNT, 100));
 
 END;
