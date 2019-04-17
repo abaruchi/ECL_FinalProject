@@ -19,22 +19,11 @@ EXPORT Q6 () := FUNCTION
                        VALOR_TRANSACAO < Parms.VALOR_MAX)
     );
 
-    dsOrgSupFiltered := IF(Parms.CODIGO_ORG_SUPERIOR = 0,
-                dsValuesLimited,
-                dsValuesLimited(CODIGO_ORGAO_SUPERIOR = Parms.CODIGO_ORG_SUPERIOR));
-    
-    dsOrgFiltered := IF(Parms.CODIGO_ORG = 0,
-                dsOrgSupFiltered,
-                dsOrgSupFiltered(CODIGO_ORGAO = Parms.CODIGO_ORG));
-
-    dsCPF_PortFiltered := IF(Parms.CPF_PORTADOR = '',
-                dsOrgFiltered,
-                dsOrgFiltered(CPF_PORTADOR = Parms.CPF_PORTADOR));
-    
-    dsCPF_FavFiltered := IF(Parms.CPF_FAVORECIDO = '',
-                dsCPF_PortFiltered,
-                dsCPF_PortFiltered(CNPJ_CPF_FAVORECIDO = Parms.CPF_FAVORECIDO));
-
-    RETURN CHOOSEN(dsCPF_FavFiltered, IF(Parms.MAX_REGISTER_COUNT <> 0, Parms.MAX_REGISTER_COUNT, 100));
-
+    dsOUT := dsValuesLimited(
+        IF (Parms.CODIGO_ORG_SUPERIOR = 0, CODIGO_ORGAO_SUPERIOR <> 0, CODIGO_ORGAO_SUPERIOR = Parms.CODIGO_ORG_SUPERIOR),
+        IF (Parms.CODIGO_ORG = 0, CODIGO_ORGAO <> 0, CODIGO_ORGAO = Parms.CODIGO_ORG),
+        IF (Parms.CPF_PORTADOR = '', CPF_PORTADOR <> '', CPF_PORTADOR = Parms.CPF_PORTADOR),
+        IF (Parms.CPF_FAVORECIDO = '', CNPJ_CPF_FAVORECIDO <> '', CNPJ_CPF_FAVORECIDO = Parms.CPF_FAVORECIDO)
+    );
+    RETURN CHOOSEN(dsOUT, IF(Parms.MAX_REGISTER_COUNT <> 0, Parms.MAX_REGISTER_COUNT, 100));
 END;
