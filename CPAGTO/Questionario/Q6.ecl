@@ -3,6 +3,25 @@ IMPORT CPAGTO.Data_Consolidation as ds;
 IMPORT CPAGTO.Questionario.UTILS as util;
 
 EXPORT Q6 () := FUNCTION
+/*
+    This function will query the Portal da Transparencia dataset. If a given
+    filter is not provided, no filter will be applied.
+
+    Args:
+        DATA_INICIAL(str): Start date
+        DATA_FINAL(str): End date
+        CODIG_ORG_SUPERIOR(uns): The code of the government agency
+        CODIGO_ORG(uns): The code of the government agency department
+        CPF_PORTADOR(str): The CPF id of the credit card owner
+        CPF_FAVORECIDO(str): The CPF id of the receiver
+        VALOR_MIN(uns): Min value spent
+        VALOR_MAX(uns): Max value spent 
+        MAX_REG_COUNT(uns): Max number of rows to show, if none is provide, 
+                            default will be 100.
+
+    Returns:
+        dataset: A filtered dataset according to the user's input.
+*/
 
     Parms := STORED(ds.iCPagtoSearch);
     dsPeriodLimited := util.getByDates(Parms.DATA_INICIAL, Parms.DATA_FINAL);
